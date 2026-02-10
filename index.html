@@ -1,47 +1,928 @@
-<!-- 删除这个重复的Projects Section -->
-<section class="section" id="projects" style="background: #f8f8fa;">
-    <h2 class="section-title animate-fade-in">Featured Projects</h2>
-    <p class="section-subtitle animate-fade-in delay-1">
-        Selected work showcasing the integration of 3D development with embedded systems
-    </p>
-    
-    <div class="projects-grid">
-        <!-- Project 2 -->
-        <div class="project-card animate-fade-in delay-2">
-            <div class="project-visual">
-                🧊
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ray Cheung — 3D & Embedded Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Apple-inspired Design System */
+        :root {
+            --apple-white: #f5f5f7;
+            --apple-light-gray: #d2d2d7;
+            --apple-gray: #86868b;
+            --apple-dark-gray: #424245;
+            --apple-black: #1d1d1f;
+            --apple-blue: #0071e3;
+            --apple-blue-light: #2997ff;
+            --apple-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --apple-card-bg: rgba(255, 255, 255, 0.8);
+            --apple-blur: blur(20px);
+            --apple-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --apple-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
+            
+            /* Spacing System */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+            --space-4xl: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', sans-serif;
+            background: var(--apple-white);
+            color: var(--apple-black);
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            overflow-x: hidden;
+        }
+
+        /* Navigation - Apple Style */
+        .apple-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: var(--apple-blur);
+            -webkit-backdrop-filter: var(--apple-blur);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-xl);
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .apple-logo {
+            font-size: 21px;
+            font-weight: 600;
+            color: var(--apple-black);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .apple-logo i {
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-xl);
+            align-items: center;
+        }
+
+        .nav-link {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--apple-dark-gray);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--apple-black);
+        }
+
+        .nav-link.active {
+            color: var(--apple-blue);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--apple-blue);
+        }
+
+        /* Hero Section */
+        .apple-hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 88px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(118, 75, 162, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 var(--space-xl);
+            text-align: center;
+        }
+
+        .hero-subtitle {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--apple-gray);
+            margin-bottom: var(--space-lg);
+            letter-spacing: -0.003em;
+        }
+
+        .hero-title {
+            font-size: 80px;
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.015em;
+            background: var(--apple-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero-description {
+            font-size: 24px;
+            color: var(--apple-dark-gray);
+            max-width: 680px;
+            margin: 0 auto var(--space-2xl);
+            line-height: 1.41667;
+            font-weight: 400;
+            letter-spacing: .011em;
+        }
+
+        .hero-tech {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+            margin-top: var(--space-2xl);
+        }
+
+        .tech-pill {
+            padding: var(--space-sm) var(--space-lg);
+            background: var(--apple-card-bg);
+            backdrop-filter: var(--apple-blur);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 100px;
+            font-size: 17px;
+            font-weight: 500;
+            color: var(--apple-dark-gray);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tech-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--apple-shadow);
+            color: var(--apple-black);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: var(--space-4xl) var(--space-xl);
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+            color: var(--apple-black);
+            letter-spacing: -0.015em;
+        }
+
+        .section-subtitle {
+            font-size: 21px;
+            color: var(--apple-gray);
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto var(--space-3xl);
+            line-height: 1.381;
+            font-weight: 400;
+        }
+
+        /* Skills Grid - Apple Card Style */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            background: var(--apple-card-bg);
+            backdrop-filter: var(--apple-blur);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+            padding: var(--space-2xl);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--apple-gradient);
+            transform: scaleX(0);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--apple-shadow-lg);
+        }
+
+        .skill-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-icon {
+            font-size: 40px;
+            margin-bottom: var(--space-lg);
+            display: inline-block;
+        }
+
+        .skill-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--apple-black);
+        }
+
+        .skill-description {
+            font-size: 17px;
+            color: var(--apple-gray);
+            line-height: 1.47059;
+            margin-bottom: var(--space-lg);
+        }
+
+        .skill-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .tech-tag {
+            padding: var(--space-xs) var(--space-md);
+            background: rgba(0, 113, 227, 0.08);
+            color: var(--apple-blue);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: var(--apple-card-bg);
+            backdrop-filter: var(--apple-blur);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--apple-shadow-lg);
+        }
+
+        .project-visual {
+            height: 200px;
+            background: var(--apple-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-visual::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card:hover .project-visual::after {
+            transform: translateX(100%);
+        }
+
+        .project-content {
+            padding: var(--space-xl);
+        }
+
+        .project-title {
+            font-size: 21px;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--apple-black);
+        }
+
+        .project-description {
+            font-size: 17px;
+            color: var(--apple-gray);
+            line-height: 1.47059;
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Contact Section */
+        .apple-contact {
+            background: var(--apple-gradient);
+            color: white;
+            padding: var(--space-4xl) var(--space-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+        }
+
+        .contact-content {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            letter-spacing: -0.015em;
+        }
+
+        .contact-subtitle {
+            font-size: 21px;
+            opacity: 0.9;
+            margin-bottom: var(--space-2xl);
+            line-height: 1.381;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .apple-button {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md) var(--space-xl);
+            font-size: 17px;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 980px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .button-primary {
+            background: white;
+            color: var(--apple-blue);
+            border: none;
+        }
+
+        .button-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .button-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .apple-footer {
+            padding: var(--space-2xl) var(--space-xl);
+            text-align: center;
+            background: var(--apple-black);
+            color: var(--apple-light-gray);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            margin-bottom: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--apple-light-gray);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        .copyright {
+            font-size: 12px;
+            color: var(--apple-gray);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+
+        /* Responsive Design */
+        @media (max-width: 834px) {
+            .hero-title {
+                font-size: 64px;
+            }
+            
+            .hero-description {
+                font-size: 21px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .contact-title {
+                font-size: 48px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 48px;
+            }
+            
+            .hero-subtitle {
+                font-size: 21px;
+            }
+            
+            .hero-description {
+                font-size: 17px;
+            }
+            
+            .section {
+                padding: var(--space-3xl) var(--space-md);
+            }
+            
+            .tech-pill {
+                padding: var(--space-sm) var(--space-md);
+                font-size: 15px;
+            }
+            
+            .apple-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Utility Classes */
+        .opacity-0 { opacity: 0; }
+        .pointer-events-none { pointer-events: none; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="apple-nav">
+        <div class="nav-content">
+            <a href="#" class="apple-logo">
+                <i class="fas fa-cube"></i>
+                Ray Cheung
+            </a>
+            <div class="nav-links">
+                <a href="#about" class="nav-link active">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
-            <div class="project-content">
-                <h3 class="project-title">Blender Pipeline Tools</h3>
-                <p class="project-description">
-                    Python automation suite for Blender that streamlines 3D asset creation, 
-                    batch processing, and quality assurance workflows.
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="apple-hero" id="about">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <h2 class="hero-subtitle animate-fade-in">3D Game & Embedded Developer</h2>
+            <h1 class="hero-title animate-fade-in delay-1">Ray Cheung</h1>
+            <p class="hero-description animate-fade-in delay-2">
+                Creating immersive 3D experiences and bridging them with the physical world through 
+                embedded systems. Specializing in the intersection of virtual reality and tangible hardware.
+            </p>
+            <div class="hero-tech animate-fade-in delay-3">
+                <span class="tech-pill">⚙️ C++</span>
+                <span class="tech-pill">🎮 Unity</span>
+                <span class="tech-pill">🧊 Blender</span>
+                <span class="tech-pill">📡 ESP32</span>
+                <span class="tech-pill">🐍 Python</span>
+                <span class="tech-pill">🌐 Web</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <h2 class="section-title animate-fade-in">Expertise</h2>
+        <p class="section-subtitle animate-fade-in delay-1">
+            Combining technical depth across multiple domains to create cohesive digital-physical experiences
+        </p>
+        
+        <div class="skills-grid">
+            <!-- 3D Development -->
+            <div class="skill-card animate-fade-in delay-1">
+                <div class="skill-icon">🎮</div>
+                <h3 class="skill-title">3D Game Development</h3>
+                <p class="skill-description">
+                    Building immersive games and interactive 3D experiences using Unity 
+                    and custom engines with real-time rendering.
+                </p>
+                <div class="skill-tech">
+                    <span class="tech-tag">Unity</span>
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">OpenGL</span>
+                    <span class="tech-tag">ShaderLab</span>
+                </div>
+            </div>
+
+            <!-- Embedded Systems -->
+            <div class="skill-card animate-fade-in delay-2">
+                <div class="skill-icon">📡</div>
+                <h3 class="skill-title">Embedded & IoT</h3>
+                <p class="skill-description">
+                    Designing hardware interfaces and IoT solutions with ESP32, 
+                    connecting digital systems to physical devices and sensors.
+                </p>
+                <div class="skill-tech">
+                    <span class="tech-tag">ESP32</span>
+                    <span class="tech-tag">Arduino</span>
+                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">PCB Design</span>
+                </div>
+            </div>
+
+            <!-- 3D Content -->
+            <div class="skill-card animate-fade-in delay-3">
+                <div class="skill-icon">🧊</div>
+                <h3 class="skill-title">3D Content Pipeline</h3>
+                <p class="skill-description">
+                    Modeling, texturing, and animating in Blender, with Python 
+                    automation for efficient 3D asset workflows.
+                </p>
+                <div class="skill-tech">
+                    <span class="tech-tag">Blender</span>
+                    <span class="tech-tag">Python API</span>
+                    <span class="tech-tag">Substance</span>
+                    <span class="tech-tag">Rigging</span>
+                </div>
+            </div>
+
+            <!-- Development Tools -->
+            <div class="skill-card animate-fade-in delay-4">
+                <div class="skill-icon">🔧</div>
+                <h3 class="skill-title">Development Tools</h3>
+                <p class="skill-description">
+                    Creating web interfaces and automation tools to support 
+                    game development and hardware integration workflows.
                 </p>
                 <div class="skill-tech">
                     <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Blender API</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">React</span>
                     <span class="tech-tag">Automation</span>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Project 3 -->
-        <div class="project-card animate-fade-in delay-3">
-            <div class="project-visual">
-                🌐
+    <!-- Projects Section -->
+    <section class="section" id="projects" style="background: #f8f8fa;">
+        <h2 class="section-title animate-fade-in">Featured Projects</h2>
+        <p class="section-subtitle animate-fade-in delay-1">
+            Selected work showcasing the integration of 3D development with embedded systems
+        </p>
+        
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card animate-fade-in delay-1">
+                <div class="project-visual">
+                    🎮
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">ESP32 Game Controller</h3>
+                    <p class="project-description">
+                        Custom hardware controller with haptic feedback, connecting Unity games 
+                        to physical inputs through ESP32 wireless communication.
+                    </p>
+                    <div class="skill-tech">
+                        <span class="tech-tag">C++</span>
+                        <span class="tech-tag">ESP32</span>
+                        <span class="tech-tag">Unity</span>
+                    </div>
+                </div>
             </div>
-            <div class="project-content">
-                <h3 class="project-title">3D Web Portfolio</h3>
-                <p class="project-description">
-                    Interactive 3D model viewer using Three.js, showcasing game assets 
-                    with real-time lighting and material controls.
-                </p>
-                <div class="skill-tech">
-                    <span class="tech-tag">Three.js</span>
-                    <span class="tech-tag">WebGL</span>
-                    <span class="tech-tag">JavaScript</span>
+
+            <!-- Project 2 -->
+            <div class="project-card animate-fade-in delay-2">
+                <div class="project-visual">
+                    🧊
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Blender Pipeline Tools</h3>
+                    <p class="project-description">
+                        Python automation suite for Blender that streamlines 3D asset creation, 
+                        batch processing, and quality assurance workflows.
+                    </p>
+                    <div class="skill-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Blender API</span>
+                        <span class="tech-tag">Automation</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card animate-fade-in delay-3">
+                <div class="project-visual">
+                    🌐
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">3D Web Portfolio</h3>
+                    <p class="project-description">
+                        Interactive 3D model viewer using Three.js, showcasing game assets 
+                        with real-time lighting and material controls.
+                    </p>
+                    <div class="skill-tech">
+                        <span class="tech-tag">Three.js</span>
+                        <span class="tech-tag">WebGL</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="apple-contact" id="contact">
+        <div class="contact-background"></div>
+        <div class="contact-content">
+            <h2 class="contact-title animate-fade-in">Let's Create Together</h2>
+            <p class="contact-subtitle animate-fade-in delay-1">
+                Interested in game development, embedded systems, or unique hardware-software integrations? 
+                Let's discuss how we can bring your ideas to life.
+            </p>
+            <div class="contact-buttons animate-fade-in delay-2">
+                <a href="mailto:ray@example.com" class="apple-button button-primary">
+                    <i class="fas fa-envelope"></i> Email Me
+                </a>
+                <a href="https://github.com/RayCheungCheung" class="apple-button button-secondary" target="_blank">
+                    <i class="fab fa-github"></i> View GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/ray-cheung-7839453aa/" class="apple-button button-secondary" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="apple-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#about" class="footer-link">About</a>
+                <a href="#skills" class="footer-link">Skills</a>
+                <a href="#projects" class="footer-link">Projects</a>
+                <a href="#contact" class="footer-link">Contact</a>
+                <a href="#" class="footer-link">Privacy</a>
+            </div>
+            <p class="copyright">
+                © 2024 Ray Cheung. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Update active nav link
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Scroll to section
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 60,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Update active nav link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.apple-hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animate-ready elements
+        document.querySelectorAll('.section-title, .section-subtitle, .skill-card, .project-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Apple-like scroll behavior
+        let lastScroll = 0;
+        const nav = document.querySelector('.apple-nav');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 0) {
+                nav.style.transform = 'translateY(0)';
+                return;
+            }
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                // Scrolling down
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling up
+                nav.style.transform = 'translateY(0)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Add hover effect to tech pills
+        document.querySelectorAll('.tech-pill').forEach(pill => {
+            pill.addEventListener('mouseenter', () => {
+                pill.style.transform = 'translateY(-4px) scale(1.05)';
+            });
+            
+            pill.addEventListener('mouseleave', () => {
+                pill.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Initialize animations on load
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.8s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
